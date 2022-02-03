@@ -5,7 +5,7 @@
 <ul class="list-group list-group-flush" id="documents">
     {% for file in analysis %}
     <li class="list-group-item">
-        {{ file.filename }}
+        <a href="/documents/{{file.id}}">{{ file.filename }}</a>
     </li>
     {% endfor %}
 </ul>
