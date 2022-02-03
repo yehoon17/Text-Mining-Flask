@@ -1,22 +1,15 @@
-{% extends "base.html" %}
-
-{% block title %} Upload {% endblock %}
-
-{% block content %}
-    <h1>Upload</h1>
-    <hr>
-    <form method="POST" enctype="multipart/form-data">
-        <h3>Upload josn file</h3>   
-        <input type="file" name="file">
-        <input type="submit">
-    </form>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class=flashes>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-{% endblock %}
+{% extends "base.html" %} {% block title %} Upload {% endblock %} {% block content %}
+<h1>Upload</h1>
+<hr>
+<form method="POST" enctype="multipart/form-data">
+    <h3>Upload josn file</h3>
+    <input type="file" name="file">
+    <input type="submit">
+</form>
+{% with messages = get_flashed_messages() %} {% if messages %}
+<ul class=flashes>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %} {% endwith %} {% endblock %}
