@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block title %} Home {% endblock %} {% block content %}
+<h1>Documents</h1>
+<hr>
+<h3>List</h3>
+<ul class="list-group list-group-flush" id="documents">
+    {% for file in analysis %}
+    <li class="list-group-item">
+        {{ file.filename }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
