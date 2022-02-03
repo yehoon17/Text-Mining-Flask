@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block title %} Home {% endblock %} {% block content %}
+<h1>Document</h1>
+<hr>
+<h3>List</h3>
+<ul class="list-group list-group-flush" id="document">
+    {% for doc in documents %}
+    <li class="list-group-item">
+        {{ doc.doc_title }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
