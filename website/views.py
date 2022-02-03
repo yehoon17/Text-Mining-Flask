@@ -10,15 +10,25 @@ from datetime import datetime
 
 ALLOWED_EXTENSIONS = {"json"}
 
+
 def allowed_file(filename):
     return "." in filename and \
            filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
 views = Blueprint("views", __name__)
+
 
 @views.route("/")
 def home():
     return render_template("home.html")
+
+
+@views.route("/documents")
+def documents():
+    analysis = Analysis.query.all()
+    return render_template("documents.html", analysis=analysis)
+
 
 @views.route("/upload", methods=["GET", "POST"])
 def upload():
@@ -37,15 +47,17 @@ def upload():
                 analysis_id = new_analysis.id
                 for line in file:
                     db.session.add(to_doc(line, analysis_id))
-                db.session.commit()
+                    db.session.commit()
                 flash('File uploaded')
             else:
                 flash('not allowed extension')
 
     return render_template("upload.html")
 
+
 def to_doc(line, analysis_id):
     data = json.loads(line)
-    data["doc_datetime"] = datetime.strptime(data["doc_datetime"], "%Y-%m-%dT%H:%M:%S")
+    data["doc_datetime"] = datetime.strptime(
+        data["doc_datetime"], "%Y-%m-%dT%H:%M:%S")
     new_document = Document(analysis_id=analysis_id, **data)
     return new_document
