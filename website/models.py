@@ -2,6 +2,7 @@
 
 from . import db
 
+
 class Document(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     media = db.Column(db.String(20), nullable=False)
@@ -17,7 +18,7 @@ class Document(db.Model):
     doc_id = db.Column(db.String(30), nullable=False)
     doc_id = db.Column(db.String(30), nullable=False)
     analysis_id = db.Column(db.Integer, db.ForeignKey('analysis.id'),
-        nullable=False)
+                            nullable=False)
 
 
 class Analysis(db.Model):
