@@ -30,6 +30,12 @@ def documents():
     return render_template("documents.html", analysis=analysis)
 
 
+@views.route("/documents/<id>")
+def view_document(id):
+    documents = Document.query.filter_by(analysis_id=id).all()
+    return render_template("articles.html", documents=documents)
+
+
 @views.route("/upload", methods=["GET", "POST"])
 def upload():
     if request.method == "POST":
