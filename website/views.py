@@ -3,7 +3,7 @@
 from flask import Blueprint, render_template, request, flash
 from . import db
 from website.models import Analysis, Document
-from utils import *
+from website.utils import *
 from collections import Counter
 
 
@@ -27,6 +27,12 @@ def view_document(id):
     return render_template("articles.html", documents=documents)
 
 
+@views.route("tf/<id>")
+def tf(id):
+    termfrequency = TermFrequency.query.filter_by(document_id=id).all()
+    return render_template("tf.html", tf=termfrequency)
+
+
 @views.route("/upload", methods=["GET", "POST"])
 def upload():
     if request.method == "POST":
@@ -38,7 +44,8 @@ def upload():
                 analysis_id = add_analysis(file)
                 for line in file:
                     document_id = add_document(line, analysis_id)
-                    tf = Counter(Document.query.filter_by(id=document_id).first().doc_content)
+                    tf = Counter(preprocess(Document.query.filter_by(
+                        id=document_id).first().doc_content))
                     add_tf(tf, document_id)
                 flash('File uploaded')
             else:
