@@ -34,7 +34,13 @@ def view_document(id):
     return render_template("articles.html", documents=documents)
 
 
-@views.route("/tf/<id>")
+@views.route("/detail/<id>")
+def detail(id):
+    document = Document.query.filter_by(analysis_id=id).first()
+    return render_template("detail.html", document=document)
+
+
+@views.route("/detail/tf/<id>")
 def tf(id):
     termfrequency = TermFrequency.query.filter_by(document_id=id).all()
     return render_template("tf.html", tf=termfrequency)
