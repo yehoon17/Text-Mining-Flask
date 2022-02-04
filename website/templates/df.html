@@ -3,11 +3,16 @@
 <hr>
 number of articles: {{n_doc}}
 <h3>List</h3>
-<ul class="list-group list-group-flush" id="df">
+<table border="0">
+    <th>Term</th>
+    <th>DF</th>
+    <th>IDF</th>
     {% for x in df %}
-    <li class="list-group-item">
-        {{ x.term }}    {{ x.frequency }}    {{ x.idf }}
-    </li>
+    <tr>
+        <td>{{ x.term }}</td>
+        <td>{{ x.frequency }}</td>
+        <td>{{ x.idf }}</td>
+    </tr>
     {% endfor %}
-</ul>
+</table>
 {% endblock %}
