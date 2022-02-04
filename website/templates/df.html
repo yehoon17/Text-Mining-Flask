@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block title %} Term Frequency {% endblock %} {% block content %}
+<h1>Document Frequency</h1>
+<hr>
+number of articles: {{n_doc}}
+<h3>List</h3>
+<ul class="list-group list-group-flush" id="df">
+    {% for x in df %}
+    <li class="list-group-item">
+        {{ x.term }}    {{ x.frequency }}    {{ x.idf }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
