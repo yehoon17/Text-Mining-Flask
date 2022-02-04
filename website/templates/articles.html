@@ -5,7 +5,7 @@
 <ul class="list-group list-group-flush" id="document">
     {% for doc in documents %}
     <li class="list-group-item">
-        {{ doc.doc_title }} <a href="/tf/{{doc.id}}">더보기</a>
+        <a href="/detail/{{doc.id}}">{{ doc.doc_title }}</a>
     </li>
     {% endfor %}
 </ul>
