@@ -18,9 +18,11 @@ def create_app():
 
     app.register_blueprint(views, url_prefix="/")
 
-    from .models import Analysis, Document
-
     create_database(app)
+
+    from .api import api
+
+    api(app)
 
     return app
 
