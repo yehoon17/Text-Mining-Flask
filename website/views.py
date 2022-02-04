@@ -36,14 +36,22 @@ def view_document(id):
 
 @views.route("/detail/<id>")
 def detail(id):
-    document = Document.query.filter_by(analysis_id=id).first()
+    document = Document.query.filter_by(id=id).first()
     return render_template("detail.html", document=document)
 
 
-@views.route("/detail/tf/<id>")
-def tf(id):
+@views.route("/tfidf/<id>")
+def tfidf(id):
     termfrequency = TermFrequency.query.filter_by(document_id=id).all()
-    return render_template("tf.html", tf=termfrequency)
+    li = []
+    for tf in termfrequency:
+        term = tf.term
+        frequency = tf.frequency
+        idf = DocumentFrequency.query.filter_by(term=term).first().idf
+        li.append([term, frequency * idf])
+    li = normalize(li, 100)
+    li.sort(key=lambda x: x[1], reverse=True)
+    return render_template("tfidf.html", li=li)
 
 
 @views.route("/upload", methods=["GET", "POST"])
