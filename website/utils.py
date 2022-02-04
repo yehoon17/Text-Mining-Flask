@@ -3,7 +3,7 @@
 import json
 from datetime import datetime
 from . import db
-from website.models import Analysis, Document, TermFrequency, DocumentFrequency
+from website.models import *
 from werkzeug.utils import secure_filename
 import re
 from collections import Counter
