@@ -90,3 +90,17 @@ def update_df(counter: Counter):
     df = DocumentFrequency.query.all()
     for x in df:
         x.idf = log(n_doc / (1 + x.frequency))
+
+def normalize(li: list, scale=1, digit=0) -> list:
+    max_val = max(li, key=lambda x: x[1])[1]
+    min_val = min(li, key=lambda x: x[1])[1]
+
+    normalized_li = []
+    for term, score in li:
+        if max_val == min_val:
+            normalized_val = 1
+        else:
+            normalized_val = (score - min_val) / (max_val - min_val)
+        normalized_li.append([term, round(normalized_val * scale, digit)])
+
+    return normalized_li
