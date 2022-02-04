@@ -3,10 +3,11 @@
 import json
 from datetime import datetime
 from . import db
-from website.models import Analysis, Document, TermFrequency
+from website.models import Analysis, Document, TermFrequency, DocumentFrequency
 from werkzeug.utils import secure_filename
 import re
 from collections import Counter
+from math import log
 
 
 class NotValidPreprocessOptionError(Exception):
@@ -74,4 +75,18 @@ def add_tf(tf: Counter, document_id: int):
         new_tf = TermFrequency(
             term=term, frequency=tf[term], document_id=document_id)
         db.session.add(new_tf)
-        db.session.commit()
+
+
+def update_df(counter: Counter):
+    for term in counter:
+        frequency = counter[term]
+        if df := DocumentFrequency.query.filter_by(term=term).first():
+            df.frequency += frequency
+        else:
+            new_df = DocumentFrequency(term=term, frequency=frequency)
+            db.session.add(new_df)
+
+    n_doc = Document.query.count()
+    df = DocumentFrequency.query.all()
+    for x in df:
+        x.idf = log(n_doc / (1 + x.frequency))
