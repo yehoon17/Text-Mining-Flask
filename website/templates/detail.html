@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block title %} {{ document.doc_title }} {% endblock %} {% block content %}
+<h1>{{ document.doc_title }}</h1>
+{{ document.media }}
+<hr>
+{{ document.doc_content }}
+<hr>
+{{ document.source }}
+<div>
+    <a href={{document.original_article}}>원본 보기</a>
+    <a href="/tf/{{document.id}}">Term Frequency</a>
+</div>
+{% endblock %}
