@@ -2,7 +2,6 @@
 
 from flask import Blueprint, render_template, request, flash
 from . import db
-from website.models import Analysis, Document
 from website.utils import *
 from collections import Counter
 
