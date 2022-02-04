@@ -33,6 +33,7 @@ class DocumentFrequency(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     term = db.Column(db.String(20), nullable=False)
     frequency = db.Column(db.Integer, nullable=False)
+    idf = db.Column(db.Float, nullable=True)
 
 
 class Analysis(db.Model):
