@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block title %} TFIDF {% endblock %} {% block content %}
+<h1>TFIDF</h1>
+<hr>
+<table border="0">
+    <th>Term</th>
+    <th>TFIDF</th>
+    {% for term, score in li %}
+    <tr>
+        <td>{{ term }}</td>
+        <td>{{ score }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
