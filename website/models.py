@@ -16,9 +16,23 @@ class Document(db.Model):
     customer = db.Column(db.String(20), nullable=False)
     request_seq = db.Column(db.Integer, nullable=False)
     doc_id = db.Column(db.String(30), nullable=False)
-    doc_id = db.Column(db.String(30), nullable=False)
     analysis_id = db.Column(db.Integer, db.ForeignKey('analysis.id'),
                             nullable=False)
+    termfrequencies = db.relationship('TermFrequency')
+
+
+class TermFrequency(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    term = db.Column(db.String(20), nullable=False)
+    frequency = db.Column(db.Integer, nullable=False)
+    document_id = db.Column(db.Integer, db.ForeignKey('document.id'),
+                            nullable=False)
+
+
+class DocumentFrequency(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    term = db.Column(db.String(20), nullable=False)
+    frequency = db.Column(db.Integer, nullable=False)
 
 
 class Analysis(db.Model):
