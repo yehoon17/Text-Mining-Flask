@@ -22,3 +22,9 @@ Text-Mining 프로젝트를 Flask로 웹 구현
 
 ### RESTful API
 `python api_test.py` 실행
+
+### Docker
+
+`docker build -t text-mining .` 
+
+`docker run -p 8000:8000 text-mining`
